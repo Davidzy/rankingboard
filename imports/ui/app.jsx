@@ -4,33 +4,15 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { Records } from '../api/records';
-import Record from './record';
+import MyTable from './ranking-board';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    renderRecords(records) {
-        // console.log(records);
-        let rows = records.map( record =>
-            <Record key={record._id} record={record} />
-        );
-        // console.log(rows);
-        return rows;
-    }
-    render() {
-        // console.log(this.props.records);
-        return (
-            <div className="container">
-                <h2>新财富2015分析师榜单</h2>
-                <ul>
-                    {this.renderRecords(this.props.records)}
-                </ul>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <MyTable tabledata={this.props.records} title={"2015新财富最佳分析师"} />
+    )
+  }
 }
-
 
 export default createContainer( () => {
   Meteor.subscribe('records');
